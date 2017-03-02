@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbxTextSample = new System.Windows.Forms.TextBox();
             this.lblF = new System.Windows.Forms.Label();
             this.lblT = new System.Windows.Forms.Label();
@@ -42,6 +43,9 @@
             this.btn8 = new System.Windows.Forms.Button();
             this.btn7 = new System.Windows.Forms.Button();
             this.btn10 = new System.Windows.Forms.Button();
+            this.lblErrors = new System.Windows.Forms.Label();
+            this.lblTimeElapsed = new System.Windows.Forms.Label();
+            this.tmTheTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // tbxTextSample
@@ -51,7 +55,8 @@
             this.tbxTextSample.Name = "tbxTextSample";
             this.tbxTextSample.ReadOnly = true;
             this.tbxTextSample.Size = new System.Drawing.Size(563, 278);
-            this.tbxTextSample.TabIndex = 0;
+            this.tbxTextSample.TabIndex = 1;
+            this.tbxTextSample.TabStop = false;
             // 
             // lblF
             // 
@@ -78,6 +83,7 @@
             this.tbxInput.Name = "tbxInput";
             this.tbxInput.Size = new System.Drawing.Size(347, 220);
             this.tbxInput.TabIndex = 3;
+            this.tbxInput.TabStop = false;
             // 
             // btn1
             // 
@@ -85,8 +91,10 @@
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(59, 47);
             this.btn1.TabIndex = 4;
+            this.btn1.TabStop = false;
             this.btn1.Text = "1\r\n,.!?";
             this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.btn1_Click);
             // 
             // btn2
             // 
@@ -94,6 +102,7 @@
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(59, 47);
             this.btn2.TabIndex = 5;
+            this.btn2.TabStop = false;
             this.btn2.Text = "2\r\nABC";
             this.btn2.UseVisualStyleBackColor = true;
             // 
@@ -103,6 +112,7 @@
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(59, 47);
             this.btn3.TabIndex = 6;
+            this.btn3.TabStop = false;
             this.btn3.Text = "3\r\nDEF";
             this.btn3.UseVisualStyleBackColor = true;
             // 
@@ -112,6 +122,7 @@
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(59, 47);
             this.btn6.TabIndex = 9;
+            this.btn6.TabStop = false;
             this.btn6.Text = "6\r\nMNO";
             this.btn6.UseVisualStyleBackColor = true;
             // 
@@ -121,6 +132,7 @@
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(59, 47);
             this.btn5.TabIndex = 8;
+            this.btn5.TabStop = false;
             this.btn5.Text = "5\r\nJKL";
             this.btn5.UseVisualStyleBackColor = true;
             // 
@@ -130,6 +142,7 @@
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(59, 47);
             this.btn4.TabIndex = 7;
+            this.btn4.TabStop = false;
             this.btn4.Text = "4\r\nGHI";
             this.btn4.UseVisualStyleBackColor = true;
             // 
@@ -139,6 +152,7 @@
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(59, 47);
             this.btn9.TabIndex = 12;
+            this.btn9.TabStop = false;
             this.btn9.Text = "9\r\nWXYZ";
             this.btn9.UseVisualStyleBackColor = true;
             // 
@@ -148,6 +162,7 @@
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(59, 47);
             this.btn8.TabIndex = 11;
+            this.btn8.TabStop = false;
             this.btn8.Text = "8\r\nTUV";
             this.btn8.UseVisualStyleBackColor = true;
             // 
@@ -157,6 +172,7 @@
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(59, 47);
             this.btn7.TabIndex = 10;
+            this.btn7.TabStop = false;
             this.btn7.Text = "7\r\nPQRS";
             this.btn7.UseVisualStyleBackColor = true;
             // 
@@ -166,14 +182,39 @@
             this.btn10.Name = "btn10";
             this.btn10.Size = new System.Drawing.Size(59, 47);
             this.btn10.TabIndex = 13;
+            this.btn10.TabStop = false;
             this.btn10.Text = "0\r\n␣";
             this.btn10.UseVisualStyleBackColor = true;
+            // 
+            // lblErrors
+            // 
+            this.lblErrors.AutoSize = true;
+            this.lblErrors.Location = new System.Drawing.Point(85, 308);
+            this.lblErrors.Name = "lblErrors";
+            this.lblErrors.Size = new System.Drawing.Size(10, 13);
+            this.lblErrors.TabIndex = 14;
+            this.lblErrors.Text = "-";
+            // 
+            // lblTimeElapsed
+            // 
+            this.lblTimeElapsed.AutoSize = true;
+            this.lblTimeElapsed.Location = new System.Drawing.Point(481, 308);
+            this.lblTimeElapsed.Name = "lblTimeElapsed";
+            this.lblTimeElapsed.Size = new System.Drawing.Size(10, 13);
+            this.lblTimeElapsed.TabIndex = 15;
+            this.lblTimeElapsed.Text = "-";
+            // 
+            // tmTheTimer
+            // 
+            this.tmTheTimer.Tick += new System.EventHandler(this.tmTheTimer_Tick);
             // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 589);
+            this.Controls.Add(this.lblTimeElapsed);
+            this.Controls.Add(this.lblErrors);
             this.Controls.Add(this.btn10);
             this.Controls.Add(this.btn9);
             this.Controls.Add(this.btn8);
@@ -190,6 +231,9 @@
             this.Controls.Add(this.tbxTextSample);
             this.Name = "mainFrm";
             this.Text = "Dactylo9";
+            this.Load += new System.EventHandler(this.mainFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainFrm_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mainFrm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +255,9 @@
         private System.Windows.Forms.Button btn8;
         private System.Windows.Forms.Button btn7;
         private System.Windows.Forms.Button btn10;
+        private System.Windows.Forms.Label lblErrors;
+        private System.Windows.Forms.Label lblTimeElapsed;
+        private System.Windows.Forms.Timer tmTheTimer;
     }
 }
 
