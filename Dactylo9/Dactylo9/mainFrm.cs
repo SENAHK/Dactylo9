@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Dactylo9
 {
-    public partial class Form1 : Form
+    public partial class mainFrm : Form
     {
-        public Form1()
+        public mainFrm()
         {
             InitializeComponent();
         }
+
+
     }
 }
