@@ -39,5 +39,10 @@ namespace Dactylo9
             this.Taps += 1;
             return this.Content[this.Taps].ToString();
         }
+        public string Tap(int t)
+        {
+            this.Taps = t;
+            return this.Content[this.taps].ToString();
+        }
     }
 }
