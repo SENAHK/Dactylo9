@@ -81,6 +81,7 @@
             this.tbxInput.Location = new System.Drawing.Point(24, 344);
             this.tbxInput.Multiline = true;
             this.tbxInput.Name = "tbxInput";
+            this.tbxInput.ReadOnly = true;
             this.tbxInput.Size = new System.Drawing.Size(347, 220);
             this.tbxInput.TabIndex = 3;
             this.tbxInput.TabStop = false;
