@@ -83,8 +83,9 @@
             this.tbxInput.Name = "tbxInput";
             this.tbxInput.ReadOnly = true;
             this.tbxInput.Size = new System.Drawing.Size(347, 220);
-            this.tbxInput.TabIndex = 3;
-            this.tbxInput.TabStop = false;
+            this.tbxInput.TabIndex = 0;
+            this.tbxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxInput_KeyDown);
+            this.tbxInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbxInput_KeyUp);
             // 
             // btn1
             // 
@@ -233,8 +234,6 @@
             this.Name = "mainFrm";
             this.Text = "Dactylo9";
             this.Load += new System.EventHandler(this.mainFrm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainFrm_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mainFrm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

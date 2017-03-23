@@ -21,7 +21,7 @@ namespace Dactylo9
         private int lastPressedKey;
         private int cpt;
         private bool rightKey;
-        KeyEventArgs ev = new KeyEventArgs(Keys.A);
+        KeyEventArgs ev;
         private Random rnd;
         public Stopwatch Sw
         {
@@ -38,6 +38,7 @@ namespace Dactylo9
         public mainFrm()
         {
             InitializeComponent();
+            this.ev = new KeyEventArgs(Keys.A); 
             this.dbConnection = new SqlConnector();
             this.Keyboard = new T9Keyboard();
             this.sw = new Stopwatch();
@@ -51,6 +52,7 @@ namespace Dactylo9
 
         private void mainFrm_Load(object sender, EventArgs e)
         {
+            tbxInput.Focus();
             tbxTextSample.Text = GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
 
             if (!tmTheTimer.Enabled)
@@ -71,7 +73,39 @@ namespace Dactylo9
         }
 
 
-        private void mainFrm_KeyDown(object sender, KeyEventArgs e)
+        private void tmTheTimer_Tick(object sender, EventArgs e)
+        {
+
+            if (rightKey)
+            {
+                // Interval where the user can choose the character 
+                var tElapsed = sw2.ElapsedMilliseconds;
+                lblErrors.Text = tElapsed.ToString();
+
+                if (tElapsed > 2000)
+                {
+                    char userInput = Convert.ToChar(this.Keyboard.Keys[actualPressedKey].Tap(cpt));
+                    int actualPosition = tbxInput.Text.Length;
+                    if (userInput == tbxTextSample.Text[actualPosition])
+                    {
+                        // Write the character
+                        tbxInput.Text += this.Keyboard.Keys[actualPressedKey].Tap(cpt);
+                        
+                    }
+                    cpt = -1;
+                    // Reset the timer and the number of times the user keypressed
+                    sw2.Reset();
+                    sw2.Stop();
+                    
+                }
+
+                lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
+                Debug.Print(lastPressedKey + " act | " + actualPressedKey);
+            }
+            tbxInput.SelectionStart = tbxInput.Text.Length;
+        }
+
+        private void tbxInput_KeyDown(object sender, KeyEventArgs e)
         {
             this.Sw.Start();
             if (!sw2.IsRunning)
@@ -82,8 +116,9 @@ namespace Dactylo9
             ev = e;
         }
 
-        private void mainFrm_KeyUp(object sender, KeyEventArgs e)
+        private void tbxInput_KeyUp(object sender, KeyEventArgs e)
         {
+            tbxInput.SelectionStart = tbxInput.Text.Length;
             lastPressedKey = actualPressedKey;
             this.Sw.Stop();
 
@@ -111,8 +146,8 @@ namespace Dactylo9
                     rightKey = true;
                     break;
                 }
-
             }
+
             if (rightKey)
             {
                 //The key is maintained
@@ -122,7 +157,7 @@ namespace Dactylo9
                     //this.sw2.Stop();
                 }
 
-                // The user pressed an another key while stil selecting
+                // The user pressed an another key while still selecting
                 if ((actualPressedKey != lastPressedKey) && (sw2.ElapsedMilliseconds > 500))
                 {
                     char userInput = Convert.ToChar(this.Keyboard.Keys[lastPressedKey].Tap(cpt - 1));
@@ -139,40 +174,8 @@ namespace Dactylo9
                     sw2.Stop();
                     cpt = -1;
                     lastPressedKey = actualPressedKey;
-                    mainFrm_KeyDown(sender, ev);
+                    tbxInput_KeyDown(sender, ev);
                 }
-            }
-        }
-        
-        private void tmTheTimer_Tick(object sender, EventArgs e)
-        {
-
-            tbxInput.SelectionStart = tbxInput.Text.Length;
-            if (rightKey)
-            {
-                // Interval where the user can choose the character 
-                var tElapsed = sw2.ElapsedMilliseconds;
-                lblErrors.Text = tElapsed.ToString();
-
-                if (tElapsed > 2000)
-                {
-                    char userInput = Convert.ToChar(this.Keyboard.Keys[actualPressedKey].Tap(cpt));
-                    int actualPosition = tbxInput.Text.Length;
-                    if (userInput == tbxTextSample.Text[actualPosition])
-                    {
-                        // Write the character
-                        tbxInput.Text += this.Keyboard.Keys[actualPressedKey].Tap(cpt);
-                        
-                    }
-                    cpt = -1;
-                    // Reset the timer and the number of times the user keypressed
-                    sw2.Reset();
-                    sw2.Stop();
-                    
-                }
-
-                lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
-                Debug.Print(lastPressedKey + " act | " + actualPressedKey);
             }
         }
 
