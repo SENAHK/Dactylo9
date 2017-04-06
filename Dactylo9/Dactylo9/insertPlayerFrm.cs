@@ -46,7 +46,8 @@ namespace Dactylo9
 
         private void insertPlayerFrm_Load(object sender, EventArgs e)
         {
-            lblMessage.Text = String.Format("Bravo, vous avez terminé la partie avec {0} erreurs en {1} secondes !", this.game.Mistakes, this.game.GameDuration);
+            lblMessage.Text = String.Format("Bravo, vous avez terminé la partie avec {0} erreurs en {1} secondes !", this.game.Mistakes, this.game.GameDuration) + Environment.NewLine;
+
             lblMessage.Text += Environment.NewLine + "Vous pouvez ajouter votre partie aux scores en ajoutant votre nom.";
 
 

@@ -15,7 +15,7 @@ namespace Dactylo9
         private int _mistakes;
         private DateTime _startTime;
         private int _successfullCharacters;
-
+        private bool _gameHasStarted;
         public string GoalText
         {
             get { return _goalText; }
@@ -49,11 +49,16 @@ namespace Dactylo9
         public Game(string textToWrite)
         {
             this.GoalText = textToWrite;
+            this._gameHasStarted = false;
         }
 
         public void StartGame()
         {
-            _startTime = DateTime.Now;
+            if (!this._gameHasStarted)
+            {
+                _startTime = DateTime.Now;
+                this._gameHasStarted = true;
+            }
         }
 
         public void AddPlayer(string playerName)
@@ -68,12 +73,23 @@ namespace Dactylo9
         {
             this.SuccessfullCharacters += 1;
         }
+        public double GetElapsedTime()
+        {
+            if (this._gameHasStarted)
+            {
+                double elapsedTime = (DateTime.Now - this._startTime).TotalSeconds;
+                return elapsedTime;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public bool IsFinished()
         {
             if (this.GoalText.Length == this.SuccessfullCharacters)
             {
-                double elapsedTime = (DateTime.Now - this._startTime).TotalSeconds;
-                this.GameDuration = Math.Round(elapsedTime).ToString();
+                this.GameDuration = Math.Round(GetElapsedTime()).ToString();
                 return true;
             }
             else

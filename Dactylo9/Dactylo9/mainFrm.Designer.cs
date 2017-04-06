@@ -67,7 +67,7 @@
             // lblF
             // 
             this.lblF.AutoSize = true;
-            this.lblF.Location = new System.Drawing.Point(31, 308);
+            this.lblF.Location = new System.Drawing.Point(30, 330);
             this.lblF.Name = "lblF";
             this.lblF.Size = new System.Drawing.Size(48, 13);
             this.lblF.TabIndex = 1;
@@ -197,7 +197,7 @@
             // lblErrors
             // 
             this.lblErrors.AutoSize = true;
-            this.lblErrors.Location = new System.Drawing.Point(85, 308);
+            this.lblErrors.Location = new System.Drawing.Point(84, 330);
             this.lblErrors.Name = "lblErrors";
             this.lblErrors.Size = new System.Drawing.Size(10, 13);
             this.lblErrors.TabIndex = 14;

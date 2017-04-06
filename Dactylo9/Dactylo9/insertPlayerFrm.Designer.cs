@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 81);
+            this.label1.Location = new System.Drawing.Point(43, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
@@ -45,16 +45,16 @@
             // 
             // tbxPlayerName
             // 
-            this.tbxPlayerName.Location = new System.Drawing.Point(100, 81);
+            this.tbxPlayerName.Location = new System.Drawing.Point(107, 81);
             this.tbxPlayerName.Name = "tbxPlayerName";
             this.tbxPlayerName.Size = new System.Drawing.Size(100, 20);
             this.tbxPlayerName.TabIndex = 1;
             // 
             // btnSendScore
             // 
-            this.btnSendScore.Location = new System.Drawing.Point(100, 116);
+            this.btnSendScore.Location = new System.Drawing.Point(226, 81);
             this.btnSendScore.Name = "btnSendScore";
-            this.btnSendScore.Size = new System.Drawing.Size(100, 32);
+            this.btnSendScore.Size = new System.Drawing.Size(100, 20);
             this.btnSendScore.TabIndex = 2;
             this.btnSendScore.Text = "Valider";
             this.btnSendScore.UseVisualStyleBackColor = true;
@@ -67,7 +67,7 @@
             this.lblMessage.Multiline = true;
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.ReadOnly = true;
-            this.lblMessage.Size = new System.Drawing.Size(188, 40);
+            this.lblMessage.Size = new System.Drawing.Size(325, 63);
             this.lblMessage.TabIndex = 3;
             this.lblMessage.Text = "-";
             // 
@@ -76,7 +76,7 @@
             this.AcceptButton = this.btnSendScore;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(227, 169);
+            this.ClientSize = new System.Drawing.Size(350, 121);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnSendScore);
             this.Controls.Add(this.tbxPlayerName);

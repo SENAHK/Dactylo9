@@ -58,7 +58,7 @@ namespace Dactylo9
             tbxInput.Focus();
 
             // Retrieve a random text from the database
-            string textToWrite = "AA";
+            string textToWrite = "AD";
                 //GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
 
             // Create a new game with the text
@@ -85,12 +85,10 @@ namespace Dactylo9
             int offset = rnd.Next(0, samples.Count);
             return samples[offset];
         }
-
         private void btn1_Click(object sender, EventArgs e)
         {
 
         }
-
         public void StopTimers()
         {
             tmTheTimer.Stop();
@@ -98,7 +96,7 @@ namespace Dactylo9
         }
         private void tmTheTimer_Tick(object sender, EventArgs e)
         {
-
+            RefreshLabels();
             if (rightKey)
             {
                 if (this.theGame.IsFinished())
@@ -111,7 +109,7 @@ namespace Dactylo9
                 {
                     // Interval where the user can choose the character 
                     var tElapsed = sw2.ElapsedMilliseconds;
-                    lblErrors.Text = tElapsed.ToString();
+                    //lblErrors.Text = tElapsed.ToString();
 
                     if (tElapsed > 2000)
                     {
@@ -136,13 +134,12 @@ namespace Dactylo9
 
                     }
 
-                    lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
+                    //lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
                     Debug.Print(lastPressedKey + " act | " + actualPressedKey);
                 }
                 tbxInput.SelectionStart = tbxInput.Text.Length;
             }
         }
-
         private void tbxInput_KeyDown(object sender, KeyEventArgs e)
         {
             this.Sw.Start();
@@ -152,8 +149,12 @@ namespace Dactylo9
             }
             cpt += 1;
             ev = e;
+        }        
+        private void RefreshLabels()
+        {
+            lblErrors.Text = this.theGame.Mistakes.ToString();
+            lblTimeElapsed.Text = Math.Round(this.theGame.GetElapsedTime()).ToString();
         }
-
         private void tbxInput_KeyUp(object sender, KeyEventArgs e)
         {
             tbxInput.SelectionStart = tbxInput.Text.Length;
@@ -224,13 +225,11 @@ namespace Dactylo9
                 }
             }
         }
-
         private void tsmiGetScores_Click(object sender, EventArgs e)
         {
             scoresFrm = new scoresFrm();
             scoresFrm.ShowDialog();
         }
-
         private void tsmiNewGame_Click(object sender, EventArgs e)
         {
             Application.Restart();
