@@ -56,6 +56,7 @@
             // 
             // tbxTextSample
             // 
+            this.tbxTextSample.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxTextSample.Location = new System.Drawing.Point(24, 34);
             this.tbxTextSample.Multiline = true;
             this.tbxTextSample.Name = "tbxTextSample";
@@ -84,6 +85,7 @@
             // 
             // tbxInput
             // 
+            this.tbxInput.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxInput.Location = new System.Drawing.Point(24, 366);
             this.tbxInput.Multiline = true;
             this.tbxInput.Name = "tbxInput";

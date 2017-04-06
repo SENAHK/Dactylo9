@@ -76,9 +76,9 @@ namespace Dactylo9
             return result;
         }
 
-        public void InsertGame(string player, int mistakes, string time)
+        public void InsertGame(string player, int score)
         {
-            string query = String.Format("INSERT INTO parties VALUES('','{0}','{1}','{2}')", player, mistakes, time);
+            string query = String.Format("INSERT INTO parties VALUES('','{0}','{1}')", player, score);
             if (this.OpenConnection())
             {
                 //create command and assign the query and connection from the constructor
@@ -92,7 +92,7 @@ namespace Dactylo9
 
         public DataSet  GetScores()
         {
-            string query = "SELECT * from parties";
+            string query = "SELECT joueur as \"Nom\", score as \"Score\" from parties";
             DataSet ds = new DataSet();
 
             if (this.OpenConnection())

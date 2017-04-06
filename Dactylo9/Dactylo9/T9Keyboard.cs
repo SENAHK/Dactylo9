@@ -21,7 +21,7 @@ namespace Dactylo9
 
         public T9Keyboard()
         {
-            string[] values = { ",.?!1", "ABC2", "DEF3", "GHI4", "JKL5", "MNO6", "PQRS7", "TUV8", "WXYZ9", " " };
+            string[] values = { ",.'?!", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ", " " };
 
             foreach (var item in values)
             {

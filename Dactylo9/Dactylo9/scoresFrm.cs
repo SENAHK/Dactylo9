@@ -22,6 +22,17 @@ namespace Dactylo9
         private void scoresFrm_Load(object sender, EventArgs e)
         {
             dgvScores.DataSource = db.GetScores().Tables[0];
+        }
+
+        private void dgvScores_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var height = 40;
+            foreach (DataGridViewRow dr in dgvScores.Rows)
+            {
+                height += dr.Height;
+            }
+
+            dgvScores.Height = height;
             this.Size = new Size(dgvScores.Size.Width, dgvScores.Size.Height);
         }
     }

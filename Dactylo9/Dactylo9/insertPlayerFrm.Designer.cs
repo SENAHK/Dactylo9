@@ -85,7 +85,7 @@
             this.MaximizeBox = false;
             this.Name = "insertPlayerFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "insertPlayerFrm";
+            this.Text = "Fin de la partie";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.insertPlayerFrm_FormClosed);
             this.Load += new System.EventHandler(this.insertPlayerFrm_Load);
             this.ResumeLayout(false);

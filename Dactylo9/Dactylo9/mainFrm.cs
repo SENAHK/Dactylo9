@@ -58,9 +58,8 @@ namespace Dactylo9
             tbxInput.Focus();
 
             // Retrieve a random text from the database
-            string textToWrite = "AD";
-                //GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
-
+            string textToWrite = GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
+            textToWrite = "AD";
             // Create a new game with the text
             this.theGame = new Game(textToWrite);
 
@@ -85,13 +84,18 @@ namespace Dactylo9
             int offset = rnd.Next(0, samples.Count);
             return samples[offset];
         }
-        private void btn1_Click(object sender, EventArgs e)
+        private void RefreshLabels()
         {
-
+            lblErrors.Text = this.theGame.Mistakes.ToString();
+            lblTimeElapsed.Text = Math.Round(this.theGame.GetElapsedTime()).ToString();
         }
         public void StopTimers()
         {
             tmTheTimer.Stop();
+
+        }
+        private void btn1_Click(object sender, EventArgs e)
+        {
 
         }
         private void tmTheTimer_Tick(object sender, EventArgs e)
@@ -102,8 +106,7 @@ namespace Dactylo9
                 if (this.theGame.IsFinished())
                 {
                     StopTimers();
-                    this.insertPlayerFrm = new insertPlayerFrm(this.theGame);
-                    this.insertPlayerFrm.ShowDialog();
+                    ShowInsertPlayerFrm();
                 }
                 else
                 {
@@ -150,11 +153,6 @@ namespace Dactylo9
             cpt += 1;
             ev = e;
         }        
-        private void RefreshLabels()
-        {
-            lblErrors.Text = this.theGame.Mistakes.ToString();
-            lblTimeElapsed.Text = Math.Round(this.theGame.GetElapsedTime()).ToString();
-        }
         private void tbxInput_KeyUp(object sender, KeyEventArgs e)
         {
             tbxInput.SelectionStart = tbxInput.Text.Length;
@@ -193,35 +191,43 @@ namespace Dactylo9
 
                 if (this.theGame.IsFinished())
                 {
-                    this.insertPlayerFrm = new insertPlayerFrm(this.theGame);
-                    this.insertPlayerFrm.ShowDialog();
+                    StopTimers();
+                    ShowInsertPlayerFrm();
                 }
-
-                //The key is maintained
-                if (elapsed > 1000)
+                else
                 {
-                    //this.sw2.Reset();
-                    //this.sw2.Stop();
-                }
 
-                // The user pressed an another key while still selecting
-                if ((actualPressedKey != lastPressedKey) && (sw2.ElapsedMilliseconds > 500))
-                {
-                    char userInput = Convert.ToChar(this.Keyboard.Keys[lastPressedKey].Tap(cpt - 1));
-                    int actualPosition = tbxInput.Text.Length;
-
-                    Debug.Print(actualPosition.ToString());
-
-                    if (userInput == tbxTextSample.Text[actualPosition])
+                    //The key is maintained
+                    if (elapsed > 1000)
                     {
-                        tbxInput.Text += userInput.ToString();
+                        //this.sw2.Reset();
+                        //this.sw2.Stop();
                     }
 
-                    sw2.Reset();
-                    sw2.Stop();
-                    cpt = -1;
-                    lastPressedKey = actualPressedKey;
-                    tbxInput_KeyDown(sender, ev);
+                    // The user pressed an another key while still selecting
+                    if ((actualPressedKey != lastPressedKey) && (sw2.ElapsedMilliseconds > 500))
+                    {
+                        // What the user writed
+                        char userInput = Convert.ToChar(this.Keyboard.Keys[lastPressedKey].Tap(cpt - 1));
+                        int actualPosition = tbxInput.Text.Length;
+
+                        // If writed character is right
+                        if (userInput == tbxTextSample.Text[actualPosition])
+                        {
+                            tbxInput.Text += userInput.ToString();
+                            this.theGame.AddSuccessfullCharacter();
+                        }
+                        else
+                        {
+                            this.theGame.AddMistake();
+                        }
+
+                        sw2.Reset();
+                        sw2.Stop();
+                        cpt = -1;
+                        lastPressedKey = actualPressedKey;
+                        tbxInput_KeyDown(sender, ev);
+                    }
                 }
             }
         }
@@ -235,6 +241,10 @@ namespace Dactylo9
             Application.Restart();
         }
 
-
+        private void ShowInsertPlayerFrm()
+        {
+            this.insertPlayerFrm = new insertPlayerFrm(this.theGame);
+            this.insertPlayerFrm.Show();
+        }
     }
 }

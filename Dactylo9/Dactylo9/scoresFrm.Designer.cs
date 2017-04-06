@@ -38,17 +38,21 @@
             this.dgvScores.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvScores.Location = new System.Drawing.Point(0, 0);
             this.dgvScores.Name = "dgvScores";
-            this.dgvScores.Size = new System.Drawing.Size(446, 150);
+            this.dgvScores.Size = new System.Drawing.Size(276, 150);
             this.dgvScores.TabIndex = 0;
+            this.dgvScores.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvScores_DataBindingComplete);
             // 
             // scoresFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 114);
+            this.ClientSize = new System.Drawing.Size(276, 144);
             this.Controls.Add(this.dgvScores);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "scoresFrm";
-            this.Text = "scoresFrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Scores";
             this.Load += new System.EventHandler(this.scoresFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvScores)).EndInit();
             this.ResumeLayout(false);

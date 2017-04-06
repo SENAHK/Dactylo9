@@ -14,6 +14,7 @@ namespace Dactylo9
     {
         private Game game;
         private SqlConnector db;
+        private scoresFrm scoresFrm;
 
         public insertPlayerFrm(Game score)
         {
@@ -26,28 +27,33 @@ namespace Dactylo9
         private void btnSendScore_Click(object sender, EventArgs e)
         {
             string player = tbxPlayerName.Text;
-           
+
             if (player != string.Empty && player.Length < 25)
             {
                 this.game.AddPlayer(player);
-                db.InsertGame(this.game.PlayerName, this.game.Mistakes, this.game.GameDuration);
+               
+                db.InsertGame(this.game.PlayerName, this.game.Score);
             }
             else
             {
                 MessageBox.Show("Veuillez ajouter un nom de maximum 25 caractères!");
             }
+            scoresFrm = new scoresFrm();
+            scoresFrm.Show();
             this.Close();
         }
 
+
         private void insertPlayerFrm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Restart();
+
         }
 
         private void insertPlayerFrm_Load(object sender, EventArgs e)
         {
             lblMessage.Text = String.Format("Bravo, vous avez terminé la partie avec {0} erreurs en {1} secondes !", this.game.Mistakes, this.game.GameDuration) + Environment.NewLine;
 
+            lblMessage.Text += Environment.NewLine + "Votre score final: " + this.game.Score.ToString();
             lblMessage.Text += Environment.NewLine + "Vous pouvez ajouter votre partie aux scores en ajoutant votre nom.";
 
 

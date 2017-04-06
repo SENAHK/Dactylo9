@@ -41,7 +41,20 @@ namespace Dactylo9
             get { return _gameDuration; }
             set { _gameDuration = value; }
         }
+        private int _score;
 
+        public int Score
+        {
+            get { return _score; }
+            set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+                _score = value;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -85,11 +98,18 @@ namespace Dactylo9
                 return 0;
             }
         }
+        public void calculateScore()
+        {
+            int score = this.GoalText.Length / Convert.ToInt32(this.GameDuration)  * 500 - 20 * this.Mistakes;
+            this.Score = score;
+        }
+
         public bool IsFinished()
         {
             if (this.GoalText.Length == this.SuccessfullCharacters)
             {
                 this.GameDuration = Math.Round(GetElapsedTime()).ToString();
+                calculateScore();
                 return true;
             }
             else
