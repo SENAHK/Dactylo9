@@ -14,6 +14,7 @@ namespace Dactylo9
     public partial class mainFrm : Form
     {
         private SqlConnector dbConnection;
+        private Game theGame;
         private T9Keyboard _keyboard;
         private Stopwatch sw2;
         private Stopwatch sw;
@@ -23,6 +24,8 @@ namespace Dactylo9
         private bool rightKey;
         KeyEventArgs ev;
         private Random rnd;
+        public insertPlayerFrm insertPlayerFrm;
+        public scoresFrm scoresFrm;
         public Stopwatch Sw
         {
             get { return sw; }
@@ -38,7 +41,7 @@ namespace Dactylo9
         public mainFrm()
         {
             InitializeComponent();
-            this.ev = new KeyEventArgs(Keys.A); 
+            this.ev = new KeyEventArgs(Keys.A);
             this.dbConnection = new SqlConnector();
             this.Keyboard = new T9Keyboard();
             this.sw = new Stopwatch();
@@ -53,14 +56,30 @@ namespace Dactylo9
         private void mainFrm_Load(object sender, EventArgs e)
         {
             tbxInput.Focus();
-            tbxTextSample.Text = GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
 
+            // Retrieve a random text from the database
+            string textToWrite = "AA";
+                //GetRandomTextSample(this.dbConnection.SelectTexts(), rnd);
+
+            // Create a new game with the text
+            this.theGame = new Game(textToWrite);
+
+            // Show the text to the user
+            tbxTextSample.Text = textToWrite;
+
+            // Start the timer used for keyboard presses
             if (!tmTheTimer.Enabled)
             {
                 tmTheTimer.Start();
             }
         }
 
+        /// <summary>
+        /// GetRandomTextSample returns a random value from a list of string
+        /// </summary>
+        /// <param name="samples"></param>
+        /// <param name="rnd"></param>
+        /// <returns></returns>
         public string GetRandomTextSample(List<string> samples, Random rnd)
         {
             int offset = rnd.Next(0, samples.Count);
@@ -72,37 +91,56 @@ namespace Dactylo9
 
         }
 
+        public void StopTimers()
+        {
+            tmTheTimer.Stop();
 
+        }
         private void tmTheTimer_Tick(object sender, EventArgs e)
         {
 
             if (rightKey)
             {
-                // Interval where the user can choose the character 
-                var tElapsed = sw2.ElapsedMilliseconds;
-                lblErrors.Text = tElapsed.ToString();
-
-                if (tElapsed > 2000)
+                if (this.theGame.IsFinished())
                 {
-                    char userInput = Convert.ToChar(this.Keyboard.Keys[actualPressedKey].Tap(cpt));
-                    int actualPosition = tbxInput.Text.Length;
-                    if (userInput == tbxTextSample.Text[actualPosition])
-                    {
-                        // Write the character
-                        tbxInput.Text += this.Keyboard.Keys[actualPressedKey].Tap(cpt);
-                        
-                    }
-                    cpt = -1;
-                    // Reset the timer and the number of times the user keypressed
-                    sw2.Reset();
-                    sw2.Stop();
-                    
+                    StopTimers();
+                    this.insertPlayerFrm = new insertPlayerFrm(this.theGame);
+                    this.insertPlayerFrm.ShowDialog();
                 }
+                else
+                {
+                    // Interval where the user can choose the character 
+                    var tElapsed = sw2.ElapsedMilliseconds;
+                    lblErrors.Text = tElapsed.ToString();
 
-                lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
-                Debug.Print(lastPressedKey + " act | " + actualPressedKey);
+                    if (tElapsed > 2000)
+                    {
+                        char userInput = Convert.ToChar(this.Keyboard.Keys[actualPressedKey].Tap(cpt));
+                        int actualPosition = tbxInput.Text.Length;
+
+                        if (userInput == tbxTextSample.Text[actualPosition])
+                        {
+                            // Write the character
+                            tbxInput.Text += this.Keyboard.Keys[actualPressedKey].Tap(cpt);
+
+                            this.theGame.AddSuccessfullCharacter();
+                        }
+                        else
+                        {
+                            this.theGame.AddMistake();
+                        }
+                        cpt = -1;
+                        // Reset the timer and the number of times the user keypressed
+                        sw2.Reset();
+                        sw2.Stop();
+
+                    }
+
+                    lblTimeElapsed.Text = sw2.ElapsedMilliseconds.ToString();
+                    Debug.Print(lastPressedKey + " act | " + actualPressedKey);
+                }
+                tbxInput.SelectionStart = tbxInput.Text.Length;
             }
-            tbxInput.SelectionStart = tbxInput.Text.Length;
         }
 
         private void tbxInput_KeyDown(object sender, KeyEventArgs e)
@@ -150,6 +188,14 @@ namespace Dactylo9
 
             if (rightKey)
             {
+                this.theGame.StartGame();
+
+                if (this.theGame.IsFinished())
+                {
+                    this.insertPlayerFrm = new insertPlayerFrm(this.theGame);
+                    this.insertPlayerFrm.ShowDialog();
+                }
+
                 //The key is maintained
                 if (elapsed > 1000)
                 {
@@ -177,6 +223,17 @@ namespace Dactylo9
                     tbxInput_KeyDown(sender, ev);
                 }
             }
+        }
+
+        private void tsmiGetScores_Click(object sender, EventArgs e)
+        {
+            scoresFrm = new scoresFrm();
+            scoresFrm.ShowDialog();
+        }
+
+        private void tsmiNewGame_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
 
 

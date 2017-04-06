@@ -46,11 +46,17 @@
             this.lblErrors = new System.Windows.Forms.Label();
             this.lblTimeElapsed = new System.Windows.Forms.Label();
             this.tmTheTimer = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.partieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewGame = new System.Windows.Forms.ToolStripMenuItem();
+            this.scoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiGetScores = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbxTextSample
             // 
-            this.tbxTextSample.Location = new System.Drawing.Point(24, 12);
+            this.tbxTextSample.Location = new System.Drawing.Point(24, 34);
             this.tbxTextSample.Multiline = true;
             this.tbxTextSample.Name = "tbxTextSample";
             this.tbxTextSample.ReadOnly = true;
@@ -70,7 +76,7 @@
             // lblT
             // 
             this.lblT.AutoSize = true;
-            this.lblT.Location = new System.Drawing.Point(395, 308);
+            this.lblT.Location = new System.Drawing.Point(395, 330);
             this.lblT.Name = "lblT";
             this.lblT.Size = new System.Drawing.Size(80, 13);
             this.lblT.TabIndex = 2;
@@ -78,7 +84,7 @@
             // 
             // tbxInput
             // 
-            this.tbxInput.Location = new System.Drawing.Point(24, 344);
+            this.tbxInput.Location = new System.Drawing.Point(24, 366);
             this.tbxInput.Multiline = true;
             this.tbxInput.Name = "tbxInput";
             this.tbxInput.ReadOnly = true;
@@ -89,7 +95,7 @@
             // 
             // btn1
             // 
-            this.btn1.Location = new System.Drawing.Point(392, 344);
+            this.btn1.Location = new System.Drawing.Point(392, 366);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(59, 47);
             this.btn1.TabIndex = 4;
@@ -100,7 +106,7 @@
             // 
             // btn2
             // 
-            this.btn2.Location = new System.Drawing.Point(457, 344);
+            this.btn2.Location = new System.Drawing.Point(457, 366);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(59, 47);
             this.btn2.TabIndex = 5;
@@ -110,7 +116,7 @@
             // 
             // btn3
             // 
-            this.btn3.Location = new System.Drawing.Point(522, 344);
+            this.btn3.Location = new System.Drawing.Point(522, 366);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(59, 47);
             this.btn3.TabIndex = 6;
@@ -120,7 +126,7 @@
             // 
             // btn6
             // 
-            this.btn6.Location = new System.Drawing.Point(522, 402);
+            this.btn6.Location = new System.Drawing.Point(522, 424);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(59, 47);
             this.btn6.TabIndex = 9;
@@ -130,7 +136,7 @@
             // 
             // btn5
             // 
-            this.btn5.Location = new System.Drawing.Point(457, 402);
+            this.btn5.Location = new System.Drawing.Point(457, 424);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(59, 47);
             this.btn5.TabIndex = 8;
@@ -140,7 +146,7 @@
             // 
             // btn4
             // 
-            this.btn4.Location = new System.Drawing.Point(392, 402);
+            this.btn4.Location = new System.Drawing.Point(392, 424);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(59, 47);
             this.btn4.TabIndex = 7;
@@ -150,7 +156,7 @@
             // 
             // btn9
             // 
-            this.btn9.Location = new System.Drawing.Point(522, 464);
+            this.btn9.Location = new System.Drawing.Point(522, 486);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(59, 47);
             this.btn9.TabIndex = 12;
@@ -160,7 +166,7 @@
             // 
             // btn8
             // 
-            this.btn8.Location = new System.Drawing.Point(457, 464);
+            this.btn8.Location = new System.Drawing.Point(457, 486);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(59, 47);
             this.btn8.TabIndex = 11;
@@ -170,7 +176,7 @@
             // 
             // btn7
             // 
-            this.btn7.Location = new System.Drawing.Point(392, 464);
+            this.btn7.Location = new System.Drawing.Point(392, 486);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(59, 47);
             this.btn7.TabIndex = 10;
@@ -180,7 +186,7 @@
             // 
             // btn10
             // 
-            this.btn10.Location = new System.Drawing.Point(457, 517);
+            this.btn10.Location = new System.Drawing.Point(457, 539);
             this.btn10.Name = "btn10";
             this.btn10.Size = new System.Drawing.Size(59, 47);
             this.btn10.TabIndex = 13;
@@ -200,7 +206,7 @@
             // lblTimeElapsed
             // 
             this.lblTimeElapsed.AutoSize = true;
-            this.lblTimeElapsed.Location = new System.Drawing.Point(481, 308);
+            this.lblTimeElapsed.Location = new System.Drawing.Point(481, 330);
             this.lblTimeElapsed.Name = "lblTimeElapsed";
             this.lblTimeElapsed.Size = new System.Drawing.Size(10, 13);
             this.lblTimeElapsed.TabIndex = 15;
@@ -210,11 +216,52 @@
             // 
             this.tmTheTimer.Tick += new System.EventHandler(this.tmTheTimer_Tick);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.partieToolStripMenuItem,
+            this.scoresToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(609, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // partieToolStripMenuItem
+            // 
+            this.partieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewGame});
+            this.partieToolStripMenuItem.Name = "partieToolStripMenuItem";
+            this.partieToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.partieToolStripMenuItem.Text = "Partie";
+            // 
+            // tsmiNewGame
+            // 
+            this.tsmiNewGame.Name = "tsmiNewGame";
+            this.tsmiNewGame.Size = new System.Drawing.Size(154, 22);
+            this.tsmiNewGame.Text = "Nouvelle partie";
+            this.tsmiNewGame.Click += new System.EventHandler(this.tsmiNewGame_Click);
+            // 
+            // scoresToolStripMenuItem
+            // 
+            this.scoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiGetScores});
+            this.scoresToolStripMenuItem.Name = "scoresToolStripMenuItem";
+            this.scoresToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.scoresToolStripMenuItem.Text = "Scores";
+            // 
+            // tsmiGetScores
+            // 
+            this.tsmiGetScores.Name = "tsmiGetScores";
+            this.tsmiGetScores.Size = new System.Drawing.Size(169, 22);
+            this.tsmiGetScores.Text = "Afficher les scores";
+            this.tsmiGetScores.Click += new System.EventHandler(this.tsmiGetScores_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 589);
+            this.ClientSize = new System.Drawing.Size(609, 614);
             this.Controls.Add(this.lblTimeElapsed);
             this.Controls.Add(this.lblErrors);
             this.Controls.Add(this.btn10);
@@ -231,9 +278,16 @@
             this.Controls.Add(this.tbxInput);
             this.Controls.Add(this.lblT);
             this.Controls.Add(this.tbxTextSample);
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "mainFrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dactylo9";
             this.Load += new System.EventHandler(this.mainFrm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +312,11 @@
         private System.Windows.Forms.Label lblErrors;
         private System.Windows.Forms.Label lblTimeElapsed;
         private System.Windows.Forms.Timer tmTheTimer;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem partieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewGame;
+        private System.Windows.Forms.ToolStripMenuItem scoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiGetScores;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,12 +34,26 @@ namespace Dactylo9
             try
             {
                 this.connection.Open();
-                    return true;
+                return true;
             }
             catch (MySqlException e)
             {
 
                 MessageBox.Show("Erreur : " + e.Message);
+                return false;
+            }
+        }
+        
+        private bool CloseConnection()
+        {
+            try
+            {
+                connection.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -56,8 +71,38 @@ namespace Dactylo9
                 {
                     result.Add(reader["contenuTexte"] + "");
                 }
+                this.CloseConnection();
             }
             return result;
+        }
+
+        public void InsertGame(string player, int mistakes, string time)
+        {
+            string query = String.Format("INSERT INTO parties VALUES('','{0}','{1}','{2}')", player, mistakes, time);
+            if (this.OpenConnection())
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                cmd.ExecuteNonQuery();
+
+                this.CloseConnection();
+            }
+        }
+
+        public DataSet  GetScores()
+        {
+            string query = "SELECT * from parties";
+            DataSet ds = new DataSet();
+
+            if (this.OpenConnection())
+            {
+                MySqlDataAdapter adp = new MySqlDataAdapter(query, this.connection);
+
+                adp.Fill(ds);
+                this.CloseConnection();
+            }
+            return ds;
         }
     }
 }
